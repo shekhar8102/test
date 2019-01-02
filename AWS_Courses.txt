@@ -1,0 +1,422 @@
+AWS Technical Essentials
+
+1 - MODULE 1: INTRODUCTION & HISTORY TO AWS
+Navigate the AWS Management Console
+Recognize AWS Global Infrastructure
+Describe the security measures AWS provides
+
+2 - MODULE 2: AWS STORAGE & CONTENT DELIVERY
+Identify key AWS storage options
+Describe Amazon EBS
+Create an Amazon S3 bucket and manage associated objects
+
+3 - MODULE 3: COMPUTE SERVICES & NETWORKING
+Identify the different AWS compute and networking options
+Describe an Amazon Virtual Private Cloud (VPC)
+Create an Amazon EC2 instance
+Verify how to use Amazon EBS
+
+4 - MODULE 4: AWS MANAGED SERVICES & DATABASE
+Describe Amazon DynamoDB
+Verify key aspects of Amazon RDS
+Execute an Amazon RDS drive application
+
+5 - MODULE 5: DEPLOYMENT AND MANAGEMENT
+Identify AWS CloudFormation
+Describe Amazon CloudWatch metrics and alarms
+Describe Amazon Identity and Access Management (IAM)
+
+AWS Solutions Architect 
+1 - DAY 1
+• Fundamentals of Amazon Web Services (AWS)
+• Amazon S3 
+• Hands-on: S3 Lab; Creating Buckets, objects, and managing access control
+• Amazon EC2 
+• Hands-on: Hosting an Application on EC2
+
+2 - DAY 2
+• Amazon Relational Database Services (RDS) 
+• Hands-on: Deploying and scaling and application using RDS
+• Amazon Elastic Load Balancer (ELB) 
+• Hands-on: Scaling the Application using Amazon ELB
+• Amazon CloudWatch
+• Auto-Scaling 
+• Use Case Study and Lab: Deploying an auto-scaling app on the cloud using auto-scaling, EC2, RDS, ELB
+
+3 - DAY 3
+• Amazon VPC 
+• Hands-on: Hosting secure applications using public and private subnets
+• Identity & Access Management (IAM) 
+• Hands-on: Generating groups, users, access policies and control
+• CloudFront 
+• Hands-on: Setup CloudFront CDN for an Application
+• Route 53 
+• Hands-on: Moving an existing domain name to Route53 and configuring multi-location Routing
+
+4 - DAY 4
+• Cloud Formation 
+• Hands-on: Generating and Deploying Cloud Formation Templates
+• Dynamo DB
+• AWS Frequently Used Design Patterns Discussion about AWS Solutions Architect Associate Exam
+Architecting on AWS
+1 - DAY 1
+Leveraging Global Infrastructure
+Extending On-Premises into the Cloud
+Computing in the Cloud
+Designing Storage Subsystems
+
+2 - DAY 2
+Distributed Environments
+Choosing a Datastore
+Designing Web-Scale Media Hosting
+Event Driven Scaling
+Infrastructure as Code
+
+3 - DAY 3
+Orchestrating Batch Processing
+Reviewing Large Scale Design Patterns
+Designing for Cost
+Planning for High Availability and Disaster Recovery
+
+AWS SysOps Administrator
+1 - DAY 1
+• Fundamentals of Amazon Web Services (AWS)
+• Amazon S3 
+• Hands-on: S3 Lab; Creating Buckets, objects, and managing access control
+• Amazon EC2 
+• Hands-on: Hosting an Application on EC2
+
+2 - DAY 2
+• Amazon Relational Database Services (RDS) 
+• Hands-on: Deploying and scaling and application using RDS
+• Amazon Elastic Load Balancer (ELB) 
+• Hands-on: Scaling the Application using Amazon ELB
+• Amazon CloudWatch
+• Auto-Scaling 
+• Use Case Study and Lab: Deploying an auto-scaling app on the cloud using auto-scaling, EC2, RDS, ELB
+
+3 - DAY 3
+• Amazon VPC 
+• Hands-on: Hosting secure applications using public and private subnets
+• Identity & Access Management (IAM) 
+• Hands-on: Generating groups, users, access policies and control
+• CloudFront 
+• Hands-on: Setup CloudFront CDN for an Application
+• Route 53 
+• Hands-on: Moving an existing domain name to Route53 and configuring multi-location Routing
+
+4 - DAY 4
+• Cloud Formation 
+• Hands-on: Generating and Deploying Cloud Formation Templates
+• AWS Frequently Used Design Patterns
+Note: Participants will get the access to the testing platform post training.
+
+
+Advanced Architecting on AWS
+
+1 - DAY 1
+AWS Account Strategies
+Advanced Network Architecture
+Designing Large Datastores for AWS
+
+2 - DAY 2
+Web Scale Applications
+Building Resilience
+Comprehensive Cloud Security
+
+3 - DAY 3
+Encryption and Key Management on AWS
+Security Data on AWS
+Designing for Performance
+
+
+1 - DAY 1
+• Fundamentals of Amazon Web Services (AWS)
+• Amazon S3 
+• Hands-on: S3 Lab; Creating Buckets, objects, and managing access control
+• Amazon EC2 
+• Hands-on: Hosting an Application on EC2
+
+2 - DAY 2
+• Amazon Relational Database Services (RDS) 
+• Hands-on: Deploying and scaling and application using RDS
+• Amazon Elastic Load Balancer (ELB) 
+• Hands-on: Scaling the Application using Amazon ELB
+• Amazon CloudWatch
+• Auto-Scaling 
+• Use Case Study and Lab: Deploying an auto-scaling app on the cloud using auto-scaling, EC2, RDS, ELB
+
+3 - DAY 3
+• Amazon VPC 
+• Hands-on: Hosting secure applications using public and private subnets
+• Identity & Access Management (IAM) 
+• Hands-on: Generating groups, users, access policies and control
+• CloudFront 
+• Hands-on: Setup CloudFront CDN for an Application
+• Route 53 
+• Hands-on: Moving an existing domain name to Route53 and configuring multi-location Routing
+
+4 - DAY 4
+• Cloud Formation 
+• Hands-on: Generating and Deploying Cloud Formation Templates
+• AWS Frequently Used Design Patterns
+Note: Participants will get the access to the testing platform post training.
+
+Data Warehousing on AWS
+
+
+1 - DAY 1
+Course Introduction
+Introduction to Data Warehousing
+Introduction to Amazon Redshift
+Understanding Amazon Redshift Components and Resources
+Launching an Amazon Redshift Cluster
+
+2 - DAY 2
+Reviewing Data Warehousing Approaches
+Identifying Data Sources and Requirements
+Designing the Data Warehouse
+Loading Data into the Data Warehouse
+
+3 - DAY 3
+Writing Queries and Tuning Performance
+Maintaining the Data Warehouse
+Analyzing and Visualizing Data
+
+Developing on AWS
+
+1 - DAY 1: GETTING STARTED
+Working with the AWS code library, SDKs, and IDE toolkits
+Introduction to AWS security features
+Service object models and baseline concepts for working with Amazon Simple Storage Service (S3) and Amazon DynamoDB
+
+2 - DAY 2: WORKING WITH AWS SERVICES
+Service object models and baseline concepts for working with the Amazon Simple Queue Service (SQS) and the Amazon Simple Notification Service (SNS)
+Applying AWS security features
+
+3 - DAY 3: APPLICATION DEVELOPMENT AND DEPLOYMENT BEST PRACTICES
+Application deployment using AWS Elastic Beanstalk
+Best practices for working with AWS services
+
+Security Engineering on AWS
+
+1 - DAY 1
+Introduction to Cloud Security
+Security of the AWS Cloud
+Cloud Aware Governance and Compliance
+Identity and Access Management
+
+2 - DAY 2
+Securing AWS Infrastructure Services
+Securing AWS Container Services
+Securing AWS Abstracted Services
+Using AWS Security Services
+
+3 - DAY 3
+Data Protection in the AWS Cloud
+Building Compliant Workloads on AWS—Case Study
+Security Incident Management in the Cloud
+
+
+Systems Operations on AWS
+1 - DAY 1
+System Operations on AWS Overview
+Networking in the Cloud
+Computing in the Cloud
+
+2 - DAY 2
+Storage and Archiving in the Cloud
+Monitoring in the Cloud
+Managing Resource Consumption in the Cloud
+
+3 - DAY 3
+Configuration Management in the Cloud
+Creating Scalable Deployments in the Cloud
+Creating Automated and Repeatable Deployments
+
+
+VMware Cloud™ on AWS: Deploy and Manage
+
+1 - COURSE INTRODUCTION
+Introductions and course logistics 
+Course objectives  
+Identify additional resources for after this course 
+Identify other VMware Education offerings 
+
+2 - INTRODUCTION TO VMWARE CLOUD ON AWS
+Overview of AWS Architecture 
+Overview of VMware Cloud on AWS 
+Licensing, Pricing, and Billing
+
+3 - DEPLOYING AN SDDC
+AWS Account Creation and Management 
+Deploy and Access an SDD
+
+4 - VMWARE CLOUD ON AWS: STORAGE
+VMware vSAN in VMware Cloud on AWS 
+Using Amazon S3 with VMware Cloud on AWS 
+Using Amazon EFS with VMware Cloud on AWS 
+
+5 - VMWARE CLOUD ON AWS: NETWORKING
+Overview of VMware Cloud on AWS Networking  Configure Management Gateway Networking  Configure Compute Gateway Networking 
+Inter-SDDC Networking 
+
+6 - WORKING WITH ON-PREMISES VMWARE VSPHERE
+Operations with On-Premises vSphere 
+Hybrid Linked Mode 
+Hybrid Cloud Extension 
+Using Content Library Files
+
+7 - VMWARE CLOUD ON AWS PERMISSIONS AND SECURITY
+Understand VMware Cloud on AWS Permissions  Configure VMware Cloud on AWS Permissions  Security Hardening for VMware Cloud on AWS
+
+8 - SCALING THE SDDC AND HOST MANAGEMENT
+Sizing the SDDC 
+Cluster Management 
+Add and Remove Hosts 
+Host Remediation 
+
+9 - VIRTUAL MACHINE MANAGEMENT
+Create Virtual Machines 
+Migrate Virtual Machines  
+Configure Virtual Machines 
+DRS, HA, and vSphere FT 
+
+10 - WORKING WITH OTHER AWS SERVICES
+Overview of AWS Services 
+Integrations with AWS  
+Using AWS Cloud Formation to deploy an SDDC 
+
+11 - USING OTHER VMWARE PRODUCTS WITH THE SDDC
+Site Recovery Add-On Service 
+VMware Horizon® 
+ VMware vRealize® AutomationTM 
+Using APIs and VMware vSphere® PowerCLITM 
+
+12 - MAINTAINING AND TROUBLESHOOTING VMWARE CLOUD ON AWS
+Best Practice Maintenance 
+Support and Staying Up-to-Date 
+Common Troubleshooting Steps 
+
+
+Big Data on AWS
+
+1 - DAY 1
+Overview of Big Data, Apache Hadoop, and the Benefits of Amazon EMR
+Amazon EMR Architecture
+Using Amazon EMR
+Launching and Using an Amazon EMR Cluster
+Hadoop Programming Frameworks
+
+2 - DAY 2
+Using Hive for Advertising Analytics
+Using Streaming for Life Sciences Analytics
+Overview: Spark and Shark for In-Memory Analytics
+Using Spark and Shark for In-Memory Analytics
+Managing Amazon EMR Costs
+Overview of Amazon EMR Security
+Data Ingestion, Transfer, and Compression
+Using Amazon Kinesis for Real-Time Big Data Processing
+
+3 - DAY 3
+Using Amazon Kinesis for Real-Time Big Data Processing
+AWS Data Storage Options
+Using DynamoDB with Amazon EMR
+Overview: Amazon Redshift and Big Data
+Using Amazon Redshift for Big Data
+Visualizing and Orchestrating Big Data
+Using Tableau Desktop or Jaspersoft BI to Visualize Big Data
+
+
+AWS DevOps Engineer
+
+
+1 - INTRODUCTION TO DEVOPS
+Fundamentals of DevOps
+Continuous Integration
+Continuous Build
+Continuous Deployment
+Deployment Strategies
+Advance EC2
+Advance Auto Scaling
+Hands-on Lab: Manage rolling updates with Auto Scaling and CloudFormation
+
+2 - CLOUDFORMATION
+Bootstrapping the instances using cfn-init
+Wait Conditions
+Nested Stacks
+Rolling stack updates using Auto Scaling
+Hands-on Lab: Manage rolling updates with Auto Scaling and CloudFormation
+
+3 - INTRODUCTION TO REDSHIFT
+RedShift Clusters / Cluster Types
+Data Modeling
+Security & Authorization
+RDS vs RedShift
+Use Cases
+
+4 - INTRODUCTION TO AWS LAMBDA
+5 - SIMPLE NOTIFICATION SERVICE
+Introduction
+Delivery Methods
+
+6 - SIMPLE WORKFLOW SERVICE
+SWF Domains
+Deciders / Workers
+Workflow Lifecycle
+Use Cases
+
+7 - AWS ELASTIC BEANSTALK
+Introduction
+Applications
+Environments
+Managing Deployments
+Bootstrapping packages on the stack
+Hands-on Lab: Installing the application and creating multiple environments
+
+8 - ADVANCE SQS
+Messages Receiving Order
+Distributed Queues
+Dead Letter Queue
+Message Lifecycle
+Integration with SNS
+
+
+9 - USE CASES OF SQS, SWF AND SNS
+10 - IAM
+Cross-Account Access
+Consolidated Billing
+Role based Access Control
+Federation
+Hands-on Lab: Web Identity Federation
+
+11 - CODE DEPLOY
+Introduction
+Key Concepts
+Repositories
+Deployment Workflow
+AppSpec Files
+
+12 - CONTINUOUS DELIVERY AND INTEGRATION WITH AWS CODE PIPELINE
+Code Pipeline
+Workflow using Code Pipeline
+Integration with other AWS Services
+Hands-on Lab: Update the application on Beanstalk using Code Pipeline and Code Deploy
+
+13 - KINESIS
+Introduction
+Kinesis Firehose
+Kinesis vs SQS
+
+14 - ADVANCE CLOUDWATCH
+CloudWatch log aggregation capabilities
+Hands-on Lab: Streaming logs to store in S3 using Kinesis
+
+15 - OPSWORKS
+Introduction
+Terminology
+OpsWorks Events
+OpsWorks Permissions
+Rolling Deployments
+Best Practices
+Hands-on Lab: Managing deployments using OpsWorks
