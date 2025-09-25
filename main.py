@@ -2,25 +2,51 @@ import time
 import requests
 from dhanhq import dhanhq
 from config import CLIENT_ID, ACCESS_TOKEN
+from datetime import date, timedelta, datetime
 
 # Constants
-SENSEX_SECURITY_ID = "51"
-BSE_EXCHANGE = "BSE"
+SENSEX_SECURITY_ID = "1"
+BSE_EXCHANGE = "BSE_I"
 MODE = "test"  # "test" or "prod"
 
-def get_live_sensex_price(dhan):
+class MockDhan:
+    def get_market_quote(self, securities, exchange_segment, instrument_type):
+        return {'status': 'success', 'data': [{'ltp': 75000}]}
+
+    def get_option_chain(self, symbol, exchange_segment, instrument_type, expiry_date=None):
+        return {
+            'status': 'success',
+            'data': {
+                'expiry_dates': ['2025-10-31'],
+                'option_chain': [
+                    {'strike_price': 75000, 'ce_security_id': 'CE75000', 'pe_security_id': 'PE75000'},
+                    {'strike_price': 75100, 'ce_security_id': 'CE75100', 'pe_security_id': 'PE75100'},
+                    {'strike_price': 74900, 'ce_security_id': 'CE74900', 'pe_security_id': 'PE74900'},
+                ]
+            }
+        }
+
+    def place_order(self, security_id, exchange_segment, transaction_type, quantity, order_type, product_type, price):
+        return {'status': 'success', 'data': {'orderId': f"test_{security_id}"}}
+
+    def get_order_by_id(self, order_id):
+        return {'status': 'success', 'data': {'status': 'TRADED'}}
+
+    def get_positions(self):
+        return {'status': 'success', 'data': []}
+
+def get_sensex_ltp(dhan):
     """
     Fetches the live spot price of the Sensex index.
     """
     try:
-        # Using quote API to get LTP
-        response = dhan.get_quote(
-            security_id=SENSEX_SECURITY_ID,
+        response = dhan.get_market_quote(
+            securities=[SENSEX_SECURITY_ID],
             exchange_segment=BSE_EXCHANGE,
             instrument_type='INDEX'
         )
         if response and response.get('status') == 'success':
-            return response['data']['last_price']
+            return response['data'][0]['ltp']
         else:
             error_message = response.get('errorMessage', 'Unknown error')
             print(f"Error fetching Sensex price: {error_message}")
@@ -31,8 +57,6 @@ def get_live_sensex_price(dhan):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         return None
-
-from datetime import date, timedelta, datetime
 
 def get_security_id_for_option(dhan, strike, option_type):
     """
@@ -110,87 +134,20 @@ def place_short_straddle(dhan, strike, mode):
                 return None
         else:
             print(f"Test mode: Would place short straddle for {ce_security_id} and {pe_security_id}")
-            straddle['ce_order_id'] = 'test_ce_order_id'
-            straddle['pe_order_id'] = 'test_pe_order_id'
+            straddle['ce_order_id'] = f"test_{ce_security_id}"
+            straddle['pe_order_id'] = f"test_{pe_security_id}"
             return straddle
 
     except Exception as e:
         print(f"Error placing short straddle for strike {strike}: {e}")
         return None
 
-
-def main():
-    """
-    Main function to run the trading application.
-    """
-    global MODE
-
-    print("--- Sensex Straddle Trading App ---")
-    mode_choice = input("Enter mode (test/prod): ").lower()
-    if mode_choice in ["test", "prod"]:
-        MODE = mode_choice
-    else:
-        print("Invalid mode. Defaulting to 'test'.")
-    print("-" * 35)
-
-    dhan = dhanhq(CLIENT_ID, ACCESS_TOKEN)
-
-    print("Fetching initial Sensex price...")
-    sensex_price = get_live_sensex_price(dhan)
-
-    if not sensex_price:
-        print("Could not fetch Sensex price. Exiting.")
-        return
-
-    print(f"Current Sensex Price: {sensex_price:.2f}")
-    strikes = list(get_straddle_strikes(sensex_price))
-
-    while True:
-        print("\n--- Initial Straddle Setup ---")
-        print(f"Current Straddle Strikes: {strikes[0]}, {strikes[1]}, {strikes[2]}")
-        print("Options: [U]p, [D]own, [F]ire, [E]xit")
-        choice = input("Enter your choice: ").upper()
-
-        if choice == 'U':
-            strikes = [s + 100 for s in strikes]
-        elif choice == 'D':
-            strikes = [s - 100 for s in strikes]
-        elif choice == 'F':
-            tracked_straddles = []
-            for strike in strikes:
-                straddle = place_short_straddle(dhan, strike, MODE)
-                if straddle:
-                    tracked_straddles.append(straddle)
-
-            # Confirm all orders are executed
-            all_executed = False
-            while not all_executed:
-                all_executed = True
-                for straddle in tracked_straddles:
-                    for order_id in [straddle['ce_order_id'], straddle['pe_order_id']]:
-                        status = check_order_status(dhan, order_id)
-                        if status != 'E': # Executed
-                            all_executed = False
-                            print(f"Order {order_id} is still {status}. Waiting...")
-                            time.sleep(2)
-                            break
-                    if not all_executed:
-                        break
-
-            print("All orders executed. Entering position management.")
-            manage_positions(dhan, tracked_straddles)
-            break
-        elif choice == 'E':
-            break
-        else:
-            print("Invalid choice. Please try again.")
-
 def check_order_status(dhan, order_id):
     """
     Checks the status of a placed order.
     """
     if "test" in order_id:
-        return "E"  # Simulate immediate execution for test orders
+        return "TRADED"  # Simulate immediate execution for test orders
 
     try:
         response = dhan.get_order_by_id(order_id)
@@ -248,12 +205,9 @@ def manage_positions(dhan, tracked_straddles):
                 pe_leg = next((p for p in open_positions if p.get('securityId') == straddle.get('pe_security_id')), None)
 
                 if ce_leg and pe_leg:
-                    ce_ltp_response = dhan.get_quote(ce_leg['securityId'], ce_leg['exchangeSegment'], 'OPTION')
-                    pe_ltp_response = dhan.get_quote(pe_leg['securityId'], pe_leg['exchangeSegment'], 'OPTION')
-                    ce_ltp = ce_ltp_response['data']['last_price'] if ce_ltp_response and ce_ltp_response.get('status') == 'success' else ce_leg.get('sellAvg', 0)
-                    pe_ltp = pe_ltp_response['data']['last_price'] if pe_ltp_response and pe_ltp_response.get('status') == 'success' else pe_leg.get('sellAvg', 0)
-
-                    pnl = ((ce_leg.get('sellAvg', 0) - ce_ltp) * ce_leg.get('quantity', 0)) + ((pe_leg.get('sellAvg', 0) - pe_ltp) * pe_leg.get('quantity', 0))
+                    ce_pnl = (ce_leg.get('sellAvg', 0) - ce_leg.get('ltp', 0)) * ce_leg.get('netQty', 0)
+                    pe_pnl = (pe_leg.get('sellAvg', 0) - pe_leg.get('ltp', 0)) * pe_leg.get('netQty', 0)
+                    pnl = ce_pnl + pe_pnl
                     print(f"Straddle Strike: {straddle['strike']}, P&L: {pnl:.2f}")
 
             print("\nOptions: [U]pdate, [M]ove Top, [N]ove Bottom, [E]xit")
@@ -275,6 +229,9 @@ def manage_positions(dhan, tracked_straddles):
                 if new_straddle:
                     tracked_straddles.append(new_straddle)
                     tracked_straddles.sort(key=lambda s: s['strike'])
+                else:
+                    print("Failed to place new straddle. Re-adding the old one.")
+                    tracked_straddles.append(top_straddle)
 
             elif choice == 'N':
                 if len(tracked_straddles) < 3:
@@ -290,6 +247,9 @@ def manage_positions(dhan, tracked_straddles):
                 if new_straddle:
                     tracked_straddles.append(new_straddle)
                     tracked_straddles.sort(key=lambda s: s['strike'])
+                else:
+                    print("Failed to place new straddle. Re-adding the old one.")
+                    tracked_straddles.append(bottom_straddle)
 
             elif choice == 'E':
                 break
@@ -303,6 +263,75 @@ def manage_positions(dhan, tracked_straddles):
 
         time.sleep(5)
 
+
+def main():
+    """
+    Main function to run the trading application.
+    """
+    global MODE
+
+    print("--- Sensex Straddle Trading App ---")
+    mode_choice = input("Enter mode (test/prod): ").lower()
+    if mode_choice in ["test", "prod"]:
+        MODE = mode_choice
+    else:
+        print("Invalid mode. Defaulting to 'test'.")
+    print("-" * 35)
+
+    if MODE == 'test':
+        dhan = MockDhan()
+    else:
+        dhan = dhanhq(CLIENT_ID, ACCESS_TOKEN)
+
+    print("Fetching initial Sensex price...")
+    sensex_price = get_sensex_ltp(dhan)
+
+    if not sensex_price:
+        print("Could not fetch Sensex price. Exiting.")
+        return
+
+    print(f"Current Sensex Price: {sensex_price:.2f}")
+    strikes = list(get_straddle_strikes(sensex_price))
+
+    while True:
+        print("\n--- Initial Straddle Setup ---")
+        print(f"Current Straddle Strikes: {strikes[0]}, {strikes[1]}, {strikes[2]}")
+        print("Options: [U]p, [D]own, [F]ire, [E]xit")
+        choice = input("Enter your choice: ").upper()
+
+        if choice == 'U':
+            strikes = [s + 100 for s in strikes]
+        elif choice == 'D':
+            strikes = [s - 100 for s in strikes]
+        elif choice == 'F':
+            tracked_straddles = []
+            for strike in strikes:
+                straddle = place_short_straddle(dhan, strike, MODE)
+                if straddle:
+                    tracked_straddles.append(straddle)
+
+            # Confirm all orders are executed
+            all_executed = False
+            while not all_executed:
+                all_executed = True
+                for straddle in tracked_straddles:
+                    for order_id in [straddle['ce_order_id'], straddle['pe_order_id']]:
+                        status = check_order_status(dhan, order_id)
+                        if status != 'TRADED': # Executed
+                            all_executed = False
+                            print(f"Order {order_id} is still {status}. Waiting...")
+                            time.sleep(2)
+                            break
+                    if not all_executed:
+                        break
+
+            print("All orders executed. Entering position management.")
+            manage_positions(dhan, tracked_straddles)
+            break
+        elif choice == 'E':
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
     main()
