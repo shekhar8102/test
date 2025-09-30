@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Dhan Trading Helper",
+  "version": "1.0",
+  "description": "Adds custom trading buttons to the Dhan positions page.",
+  "icons": {
+    "48": "icons/icon-48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://web.dhan.co/index/positions"],
+      "js": ["content.js"]
+    }
+  ],
+  "host_permissions": [
+    "*://*.dhan.co/*"
+  ],
+  "permissions": [
+    "activeTab"
+  ]
+}
