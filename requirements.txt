@@ -1,3 +1,5 @@
-dhanhq
-requests
+delta-rest-client
+pandas
+stock-indicators
 python-dotenv
+requests
