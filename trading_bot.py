@@ -2,7 +2,8 @@
 import time
 import argparse
 import pandas as pd
-from delta_rest_client import DeltaRestClient, APIError
+import requests
+from delta_rest_client import DeltaRestClient
 from stock_indicators import indicators
 from config import (
     DELTA_API_KEY_PROD,
@@ -59,7 +60,7 @@ def get_historical_data(delta_client, product_id, resolution):
             for c in candles["result"]
         ]
         return quotes
-    except APIError as e:
+    except requests.exceptions.HTTPError as e:
         print(f"Error fetching historical data for {resolution}: {e}")
         return None
     except Exception as e:
@@ -99,7 +100,7 @@ def place_order(delta_client, product_id, side, size, mode):
         print(f"--- [PROD MODE] Order placed successfully ---")
         print(f"OrderID: {order['id']}, Side: {order['side']}, Size: {order['size']}")
         return order
-    except APIError as e:
+    except requests.exceptions.HTTPError as e:
         print(f"--- [PROD MODE] Order placement failed ---")
         print(f"Error: {e}")
         return None
@@ -253,7 +254,7 @@ def main():
         global PRODUCT_ID
         PRODUCT_ID = product["id"]
         print(f"Verified Product ID for {SYMBOL}: {PRODUCT_ID}")
-    except (APIError, KeyError) as e:
+    except (requests.exceptions.HTTPError, KeyError) as e:
         print(f"Error fetching product details for {SYMBOL}: {e}")
         return
 
@@ -362,7 +363,7 @@ def main():
 
             time.sleep(LOOP_INTERVAL)
 
-        except APIError as e:
+        except requests.exceptions.HTTPError as e:
             print(f"An API error occurred in the main loop: {e}")
             time.sleep(LOOP_INTERVAL)
         except Exception as e:
